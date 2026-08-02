@@ -1,0 +1,63 @@
+---
+layout: default
+---
+
+<div class="market-layout">
+<div class="list-page">
+
+  <nav class="breadcrumb">
+    <a href="/">홈</a>
+    <span>›</span>
+    <span>{{ page.type_label }}</span>
+  </nav>
+
+  <div class="list-header">
+    <h1>{{ page.type_icon }} 전국 {{ page.type_label }}</h1>
+    <p class="list-count">전국 {{ page.stops | size }}곳</p>
+  </div>
+
+  <!-- 광고 -->
+  <div class="ad-slot">{% include ad.html %}</div>
+
+  {% assign by_route = page.stops | group_by: 'routeName' | sort: 'name' %}
+  {% for group in by_route %}
+  {% assign r_slug = group.items.first.routeSlug %}
+  <div class="region-section">
+    <h2 class="region-section-title">
+      <a href="/route/{{ r_slug }}/">{{ group.name }}</a>
+      <span class="group-count">{{ group.items | size }}곳</span>
+    </h2>
+    <div class="market-cards">
+      {% for stop in group.items %}
+      <a href="/stop/{{ stop.slug }}/" class="market-card">
+        <div class="card-name">{{ stop.stopName }}</div>
+        <div class="card-city">{{ stop.direction }}</div>
+        {% if stop.food and stop.food != "" %}
+        <div class="card-specialties">
+          <span class="sp-tag">🍴 {{ stop.food }}</span>
+        </div>
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+
+  <div class="days-nav">
+    <h3>다른 유형</h3>
+    <div class="days-btn-grid">
+      {% assign all_types = "general:🍽️ 일반휴게소,simple:🚻 간이휴게소,truck:🚛 화물차휴게소" | split: ',' %}
+      {% for t in all_types %}
+      {% assign parts = t | split: ':' %}
+      {% if parts[0] != page.type_slug %}
+      <a href="/type/{{ parts[0] }}/" class="days-btn-sm">{{ parts[1] }}</a>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+<aside class="market-sidebar">
+  {% include ad.html slot="6255378195" label="사이드바" %}
+</aside>
+</div>

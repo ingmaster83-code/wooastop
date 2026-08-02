@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wooastop.wooahouse.com/sitemap.xml

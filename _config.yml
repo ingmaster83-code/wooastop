@@ -1,0 +1,25 @@
+title: 우아스탑 - 전국 고속도로 휴게소 정보
+description: 전국 210개 고속도로 휴게소 정보를 한눈에 확인하세요. 노선별 휴게소, 대표음식, 주유소·전기차충전·화장실 등 편의시설 안내.
+url: "https://wooastop.wooahouse.com"
+baseurl: ""
+lang: ko
+timezone: Asia/Seoul
+author: WooaHouse
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - scripts/
+  - "*.py"
+  - README.md
+  - .gitignore
+  - vendor/

@@ -1,0 +1,64 @@
+---
+layout: default
+---
+
+<div class="market-layout">
+<div class="list-page">
+
+  <nav class="breadcrumb">
+    <a href="/">홈</a>
+    <span>›</span>
+    <span>{{ page.route_name }} 휴게소</span>
+  </nav>
+
+  <div class="list-header">
+    <h1>🛣️ {{ page.route_name }} 휴게소</h1>
+    <p class="list-count">총 {{ page.stops | size }}곳</p>
+  </div>
+
+  <!-- 광고 -->
+  <div class="ad-slot">{% include ad.html %}</div>
+
+  <div class="market-list">
+    {% assign dir_groups = page.stops | group_by: 'direction' %}
+    {% for group in dir_groups %}
+    <div class="days-group">
+      <h2 class="days-group-title">
+        <span>🧭 {{ group.name }}</span>
+        <span class="group-count">{{ group.items | size }}곳</span>
+      </h2>
+      <div class="market-cards">
+        {% for stop in group.items %}
+        <a href="/stop/{{ stop.slug }}/" class="market-card">
+          <div class="card-name">{{ stop.stopName }}</div>
+          <div class="card-city">{{ stop.typeLabel }}</div>
+          {% if stop.food and stop.food != "" %}
+          <div class="card-specialties">
+            <span class="sp-tag">🍴 {{ stop.food }}</span>
+          </div>
+          {% endif %}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="region-nav">
+    <h3>다른 노선 휴게소</h3>
+    <div class="region-btn-grid">
+      {% assign all_routes = site.data.reststops | map: 'routeName' | uniq | sort %}
+      {% for r in all_routes %}
+      {% assign r_slug = site.data.reststops | where: 'routeName', r | first %}
+      {% if r != page.route_name %}
+      <a href="/route/{{ r_slug.routeSlug }}/" class="region-btn-sm">{{ r }}</a>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+<aside class="market-sidebar">
+  {% include ad.html slot="6255378195" label="사이드바" %}
+</aside>
+</div>
