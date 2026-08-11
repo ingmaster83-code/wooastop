@@ -39,7 +39,7 @@ layout: default
     <div class="market-info-grid">
       {% if page.lat and page.lat != "" %}
       <div class="info-item">
-        <a href="https://map.kakao.com/link/map/{{ page.stopName | url_encode }}휴게소,{{ page.lat }},{{ page.lng }}" target="_blank" rel="noopener" class="parking-btn">🗺️ 카카오맵으로 위치 보기</a>
+        <a href="https://map.kakao.com/link/map/{{ page.stopName | url_encode }}휴게소,{{ page.lat }},{{ page.lng }}" class="parking-btn">🗺️ 카카오맵으로 위치 보기</a>
       </div>
       {% endif %}
       {% if page.phone and page.phone != "" %}
